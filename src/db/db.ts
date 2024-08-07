@@ -1,8 +1,9 @@
-import { Client } from "pg";
+import pg from "pg";
 import {drizzle} from "drizzle-orm/node-postgres"
 import { users } from "./schema/users.js";
+import { config } from "../../config.js";
 
-const client = new Client() // Database client is automatically initialized with environment variables
+const client = new pg.Client(config.dbConfig) 
 
 await client.connect()
 
