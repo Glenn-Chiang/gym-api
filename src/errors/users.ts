@@ -1,3 +1,3 @@
-import { CustomError } from "./CustomError";
+import { CustomError } from "./CustomError.js";
 
-export const USER_NOT_FOUND_ERR = new CustomError(404, "User not found");
+export const userNotFoundErr = new CustomError(404, "User not found");

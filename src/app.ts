@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { config } from "./config";
-import { usersRouter } from "./routes/users";
-import { errorHandler } from "./routes/errorHandler";
+import { config } from "../config.js";
+import { usersRouter } from "./routes/users.js";
+import { errorHandler } from "./routes/errorHandler.js";
 
 const app = express();
 

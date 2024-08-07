@@ -1,7 +1,6 @@
-import { CustomError } from "../errors/CustomError";
-import { USER_NOT_FOUND_ERR } from "../errors/users";
-import { User } from "../models/user";
-import UserRepo from "../repositories/users";
+import { userNotFoundErr } from "../errors/users.js";
+import { User } from "../models/user.js";
+import UserRepo from "../repositories/users.js";
 
 // Get all users
 function getAll(): Promise<User[]> {
@@ -14,7 +13,7 @@ async function getById(id: number): Promise<User | null> {
   if (user) {
     return user
   } else {
-    throw USER_NOT_FOUND_ERR
+    throw userNotFoundErr
   }
 }
 
@@ -27,7 +26,7 @@ async function removeAll(): Promise<void> {}
 // Remove a user
 async function remove(id: number): Promise<void> {
   if (!UserRepo.getById(id)) {
-    throw USER_NOT_FOUND_ERR
+    throw userNotFoundErr
   }
   UserRepo.remove(id)
 }

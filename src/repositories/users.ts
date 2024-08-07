@@ -1,4 +1,4 @@
-import { User } from "../models/user";
+import { User } from "../models/user.js"
 
 // Get all users
 async function getAll(): Promise<User[]> {
