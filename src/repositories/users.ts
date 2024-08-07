@@ -1,30 +1,42 @@
-import { User } from "../models/user.js"
+import { eq } from "drizzle-orm";
+import { db } from "../db/db.js";
+import { NewUser, User, users } from "../db/schema/users.js";
 
 // Get all users
 async function getAll(): Promise<User[]> {
-  return []
+  return db.select().from(users);
 }
 
-// Get user by id. If there is no match, return null.
-async function getById(id: number): Promise<User | null> {
-  return null
+// Get user by id
+async function getById(id: number): Promise<User | undefined> {
+  return (await db.select().from(users).where(eq(users.id, id))).at(0);
+}
+
+// Get user by email
+async function getByEmail(email: string): Promise<User | undefined> {
+  return (await db.select().from(users).where(eq(users.email, email))).at(0);
 }
 
 // Add a user
-async function add(user: User): Promise<void> {
-
+async function add(user: NewUser): Promise<User | undefined> {
+  return (await db.insert(users).values(user).returning()).at(0);
 }
 
 // Remove all users
 async function removeAll(): Promise<void> {
-  
+  db.delete(users);
 }
 
-// Remove a user
+// Remove a user by id
 async function remove(id: number): Promise<void> {
-  
+  db.delete(users).where(eq(users.id, id));
 }
 
 export default {
-  getAll, getById, add, removeAll, remove
-}
+  getAll,
+  getById,
+  getByEmail,
+  add,
+  removeAll,
+  remove,
+};

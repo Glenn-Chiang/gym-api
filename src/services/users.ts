@@ -1,5 +1,5 @@
+import { User } from "../db/schema/users.js";
 import { userNotFoundErr } from "../errors/users.js";
-import { User } from "../models/user.js";
 import UserRepo from "../repositories/users.js";
 
 // Get all users
@@ -8,7 +8,7 @@ function getAll(): Promise<User[]> {
 }
 
 // Get user by id
-async function getById(id: number): Promise<User | null> {
+async function getById(id: number): Promise<User | undefined> {
   const user = UserRepo.getById(id);
   if (user) {
     return user
