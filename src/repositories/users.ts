@@ -22,6 +22,11 @@ async function add(user: NewUser): Promise<User | undefined> {
   return (await db.insert(users).values(user).returning()).at(0);
 }
 
+// Update a user's name and return the updated user
+async function updateName(id: number, newName: string): Promise<User | undefined> {
+  return (await db.update(users).set({name: newName}).where(eq(users.id, id)).returning()).at(0);
+}
+
 // Remove all users
 async function removeAll(): Promise<void> {
   db.delete(users);
@@ -37,6 +42,7 @@ export default {
   getById,
   getByEmail,
   add,
+  updateName,
   removeAll,
   remove,
 };
