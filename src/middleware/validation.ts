@@ -7,7 +7,7 @@ export function validateData<T extends AnyZodObject>(data: unknown, schema: T, e
     const result = schema.safeParse(data);
 
     if (!result.success) {
-      const errorDetails = result.error.format()
+      const errorDetails = JSON.stringify(result.error.flatten().fieldErrors)
       throw new CustomError(StatusCodes.BAD_REQUEST, errorMessage + ': ' + errorDetails);
     } 
 
@@ -18,7 +18,7 @@ export function validateId(id: string): number {
   const result = z.coerce.number().safeParse(id)
   
   if (!result.success) {
-    const errorDetails = result.error.format()
+    const errorDetails = result.error.format()._errors
     throw new CustomError(StatusCodes.BAD_REQUEST, "Invalid id: " + errorDetails)
   }
 

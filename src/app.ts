@@ -4,6 +4,8 @@ import morgan from "morgan";
 import { config } from "../config.js";
 import { usersRouter } from "./routes/users.js";
 import { errorHandler } from "./routes/errorHandler.js";
+import { CustomError } from "./errors/CustomError.js";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 const app = express();
 
@@ -17,6 +19,11 @@ if (config.nodeEnv === "development") {
 }
 
 app.use(usersRouter)
+
+// Catch non-existent routes
+app.use((req, res, next) => {
+  next(new CustomError(StatusCodes.NOT_FOUND, ReasonPhrases.NOT_FOUND))
+})
 
 // Global error handler
 app.use(errorHandler)
