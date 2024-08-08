@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import UserSchema from "../db/schema/users.js";
-import { validateData, validateId } from "../middleware/validation.js";
+import { validateData, validateId } from "../validation/validation.js";
 import UserService from "../services/users.js";
 
 const router = Router();
@@ -35,7 +35,7 @@ router.post("/users", async (req, res, next) => {
       UserSchema.create,
       "Invalid user data"
     );
-    const user = await UserService.add(userData);
+    const user = await UserService.create(userData);
     res.status(StatusCodes.CREATED).json(user);
   } catch (err) {
     next(err);

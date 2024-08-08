@@ -18,7 +18,7 @@ async function getByEmail(email: string): Promise<User | undefined> {
 }
 
 // Add a user
-async function add(user: NewUser): Promise<User | undefined> {
+async function create(user: NewUser): Promise<User | undefined> {
   return (await db.insert(users).values(user).returning()).at(0);
 }
 
@@ -41,7 +41,7 @@ export default {
   getAll,
   getById,
   getByEmail,
-  add,
+  create,
   updateName,
   removeAll,
   remove,

@@ -33,14 +33,14 @@ async function getByEmail(email: string): Promise<User | undefined> {
 }
 
 // Add a user
-async function add(user: NewUser): Promise<User | undefined> {
+async function create(user: NewUser): Promise<User | undefined> {
   const existingUser = await UserRepo.getByEmail(user.email);
 
   if (existingUser) {
     throw emailInUseErr;
   }
 
-  return UserRepo.add(user);
+  return UserRepo.create(user);
 }
 
 // Update a user's name
@@ -74,7 +74,7 @@ export default {
   getAll,
   getById,
   getByEmail,
-  add,
+  create,
   updateName,
   removeAll,
   remove,

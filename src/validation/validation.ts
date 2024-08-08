@@ -7,8 +7,8 @@ export function validateData<T extends AnyZodObject>(data: unknown, schema: T, e
     const result = schema.safeParse(data);
 
     if (!result.success) {
-      const errorDetails = JSON.stringify(result.error.flatten().fieldErrors)
-      throw new CustomError(StatusCodes.BAD_REQUEST, errorMessage + ': ' + errorDetails);
+      const errorDetails = result.error.flatten().fieldErrors
+      throw new CustomError(StatusCodes.BAD_REQUEST, errorMessage, errorDetails);
     } 
 
     return result.data
