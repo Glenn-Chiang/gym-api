@@ -40,6 +40,8 @@ async function create(user: NewUser): Promise<User | undefined> {
     throw emailInUseErr;
   }
 
+  // TODO: Check validity of name and email
+
   return UserRepo.create(user);
 }
 
