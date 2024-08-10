@@ -1,5 +1,5 @@
 import { db } from "../db.js";
-import { muscleGroups, NewMuscleGroup } from "../schema/muscle_group.js";
+import { muscleGroups, NewMuscleGroup } from "../schema/muscle_groups.js";
 
 export async function seedMuscleGroups(): Promise<void> {
   await db.insert(muscleGroups).values(muscleGroupsData);
