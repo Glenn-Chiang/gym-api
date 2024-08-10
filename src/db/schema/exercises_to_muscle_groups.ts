@@ -8,10 +8,10 @@ export const exercisesToMuscleGroups = pgTable(
   {
     exerciseId: integer("exercise_id")
       .notNull()
-      .references(() => exercises.id),
+      .references(() => exercises.id, { onDelete: "cascade" }),
     muscleGroupId: integer("muscle_group_id")
       .notNull()
-      .references(() => muscleGroups.id),
+      .references(() => muscleGroups.id, { onDelete: "cascade" }),
   },
   (table) => ({
     pk: primaryKey({
@@ -20,13 +20,16 @@ export const exercisesToMuscleGroups = pgTable(
   })
 );
 
-export const exercisesToMuscleGroupsRelations = relations(exercisesToMuscleGroups, ({one}) => ({
-  exercise: one(exercises, {
-    fields: [exercisesToMuscleGroups.exerciseId],
-    references: [exercises.id]
-  }),
-  muscleGroup: one(muscleGroups, {
-    fields: [exercisesToMuscleGroups.muscleGroupId],
-    references: [muscleGroups.id]
+export const exercisesToMuscleGroupsRelations = relations(
+  exercisesToMuscleGroups,
+  ({ one }) => ({
+    exercise: one(exercises, {
+      fields: [exercisesToMuscleGroups.exerciseId],
+      references: [exercises.id],
+    }),
+    muscleGroup: one(muscleGroups, {
+      fields: [exercisesToMuscleGroups.muscleGroupId],
+      references: [muscleGroups.id],
+    }),
   })
-}))
+);
