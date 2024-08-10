@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx watch src/index.ts",
     "start": "NODE_ENV=production tsx src/index.ts",
+    "drizzle:generate": "npx drizzle-kit generate",
+    "drizzle:push": "npx drizzle-kit push",
+    "drizzle:migrate": "npx drizzle-kit migrate",
+    "seed": "node tsx src/db/seeders/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
