@@ -9,22 +9,22 @@ async function getAll(): Promise<User[]> {
 
 // Get user by id
 async function getById(id: number): Promise<User | undefined> {
-  return (await db.select().from(users).where(eq(users.id, id))).at(0);
+  return (await db.select().from(users).where(eq(users.id, id)).limit(1))[0];
 }
 
 // Get user by email
 async function getByEmail(email: string): Promise<User | undefined> {
-  return (await db.select().from(users).where(eq(users.email, email))).at(0);
+  return (await db.select().from(users).where(eq(users.email, email)).limit(1))[0];
 }
 
 // Add a user
 async function create(user: NewUser): Promise<User | undefined> {
-  return (await db.insert(users).values(user).returning()).at(0);
+  return (await db.insert(users).values(user).returning())[0];
 }
 
 // Update a user's name and return the updated user
 async function updateName(id: number, newName: string): Promise<User | undefined> {
-  return (await db.update(users).set({name: newName}).where(eq(users.id, id)).returning()).at(0);
+  return (await db.update(users).set({name: newName}).where(eq(users.id, id)).returning())[0];
 }
 
 // Remove all users
