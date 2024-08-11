@@ -8,8 +8,8 @@ async function getAll(): Promise<User[]> {
 }
 
 // Get user by id
-async function getById(id: number): Promise<User | undefined> {
-  return (await db.select().from(users).where(eq(users.id, id)).limit(1))[0];
+async function getById(id: number) {
+  const record = (await db.select().from(users).where(eq(users.id, id)).limit(1))[0];
 }
 
 // Get user by email
